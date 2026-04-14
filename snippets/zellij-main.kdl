@@ -1,0 +1,16 @@
+// Append these lines to your main zellij config at:
+//   ~/.config/zellij/config.kdl
+//
+// If you don't have one, run once: `zellij setup --dump-config > ~/.config/zellij/config.kdl`
+// then append the lines below.
+
+theme "flexoki-light"
+pane_frames false
+show_startup_tips false
+show_release_notes false
+
+// Toggle yazi pane with Option+B (macOS) / Alt+B.
+// Add this binding INSIDE the `shared_except "locked" { ... }` block that
+// already exists in the default config:
+//
+//     bind "Alt b" { MoveFocus "left"; ToggleFocusFullscreen; }

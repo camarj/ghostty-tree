@@ -1,0 +1,12 @@
+# Merge these sections into your ~/.config/starship.toml
+# (Override or add the style lines; keep your other sections unchanged.)
+
+[directory]
+style = "bold #da7756"
+
+[git_branch]
+style = "bold #A02F6F"
+
+[character]
+success_symbol = "[❯](bold #da7756)"
+error_symbol = "[❯](bold #AF3029)"

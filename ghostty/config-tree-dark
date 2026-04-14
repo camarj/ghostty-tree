@@ -1,0 +1,14 @@
+theme = Flexoki Dark
+
+# Acentos Claude (sobrescriben el tema)
+cursor-color = #da7756
+selection-background = #da7756
+selection-foreground = #100F0F
+
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 16
+
+macos-option-as-alt = true
+
+command = /opt/homebrew/bin/zellij --config __HOME__/.config/zellij/config-dark.kdl --layout tree-dark
+working-directory = __HOME__/Documents

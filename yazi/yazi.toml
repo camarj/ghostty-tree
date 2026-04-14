@@ -1,0 +1,21 @@
+[mgr]
+ratio = [0, 1, 0]
+
+[opener]
+edit = [
+    { run = 'nano %s', block = true, for = "unix" },
+]
+
+[open]
+prepend_rules = [
+    { mime = "text/*", use = "edit" },
+    { mime = "application/json", use = "edit" },
+    { mime = "application/javascript", use = "edit" },
+    { mime = "application/x-shellscript", use = "edit" },
+    { mime = "application/xml", use = "edit" },
+    { mime = "application/yaml", use = "edit" },
+    { mime = "application/toml", use = "edit" },
+]
+append_rules = [
+    { url = "*", use = "edit" },
+]

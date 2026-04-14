@@ -1,0 +1,10 @@
+layout {
+    tab name="tree" {
+        pane split_direction="vertical" {
+            pane name="shell" size="65%"
+            pane name="yazi" size="35%" {
+                command "yazi"
+            }
+        }
+    }
+}
