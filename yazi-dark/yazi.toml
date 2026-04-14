@@ -1,6 +1,16 @@
 [mgr]
 ratio = [0, 1, 0]
 
+[[plugin.prepend_fetchers]]
+id  = "git"
+url = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id  = "git"
+url = "*/"
+run = "git"
+
 [opener]
 edit = [
     { run = 'nano %s', block = true, for = "unix" },

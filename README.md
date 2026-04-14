@@ -13,6 +13,7 @@ A terminal profile that opens **Ghostty** with a split layout: a regular shell o
   - Right pane: [Yazi](https://yazi-rs.github.io/) (TUI file manager). Hit `Enter` on any file and it opens in `nano`; exit nano with `Ctrl+X` and you're back in the tree.
 - `ghostty-tree-dark` — same thing in **dark mode**.
 - `Option+B` inside the window toggles the right pane (hide/show the tree, like VS Code's sidebar).
+- **Git status indicators** next to each file/directory in the tree (`M` modified, `A` added, `?` untracked, `D` deleted, `U` updated) via the official `git.yazi` plugin.
 
 Every UI element (shell prompt, file icons, status bars, cursor, selection) is harmonized to Claude's orange accent `#da7756` on a Flexoki base palette.
 
@@ -243,6 +244,23 @@ Or any other CLI you'd normally run in a terminal.
 
 ---
 
+## Git status indicators
+
+When the current directory is inside a git repository, each file and folder in the tree shows its status next to the icon:
+
+| Sign | Meaning | Color |
+|---|---|---|
+| `M` | modified | yellow |
+| `A` | added / staged | Claude orange |
+| `?` | untracked | dim gray |
+| `D` | deleted | red (bold) |
+| `U` | updated | yellow |
+| `` (blank) | clean or ignored | — |
+
+Powered by the official [`git.yazi`](https://github.com/yazi-rs/plugins/tree/main/git.yazi) plugin. The installer pulls it via `ya pkg add yazi-rs/plugins:git` and configures it for both light and dark modes. Styles and symbols are set in `yazi/init.lua` and `yazi-dark/init.lua`; you can tweak either file to change signs or colors.
+
+---
+
 ## Launch from Raycast
 
 The bundled Raycast script commands let you trigger either mode from Raycast (with an optional hotkey or alias).
@@ -303,11 +321,13 @@ ghostty-tree/
 │       ├── tree.kdl             # Split layout (shell 65% | yazi 35%) — light
 │       └── tree-dark.kdl        # Same layout — dark (launches yazi with YAZI_CONFIG_HOME)
 ├── yazi/
-│   ├── yazi.toml                # Single-column tree, opens files in nano
-│   └── theme.toml               # Light color scheme
+│   ├── yazi.toml                # Single-column tree, opens files in nano, git fetchers
+│   ├── theme.toml               # Light color scheme
+│   └── init.lua                 # git.yazi plugin styles (signs + colors)
 ├── yazi-dark/
 │   ├── yazi.toml                # Copy of above
-│   └── theme.toml               # Dark color scheme
+│   ├── theme.toml               # Dark color scheme
+│   └── init.lua                 # git.yazi plugin styles (dark variant)
 ├── snippets/
 │   ├── ghostty-main.conf        # Append to your main Ghostty config
 │   ├── zellij-main.kdl          # Append/merge into ~/.config/zellij/config.kdl

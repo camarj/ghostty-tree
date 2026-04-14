@@ -110,13 +110,24 @@ ok "zellij/layouts/tree{,-dark}.kdl"
 
 # Yazi configs (light + dark)
 mkdir -p "$HOME_DIR/.config/yazi" "$HOME_DIR/.config/yazi-dark"
-for f in yazi.toml theme.toml; do
+for f in yazi.toml theme.toml init.lua; do
     backup "$HOME_DIR/.config/yazi/$f"
     cp "$REPO_DIR/yazi/$f" "$HOME_DIR/.config/yazi/$f"
     backup "$HOME_DIR/.config/yazi-dark/$f"
     cp "$REPO_DIR/yazi-dark/$f" "$HOME_DIR/.config/yazi-dark/$f"
 done
-ok "yazi/ + yazi-dark/ (yazi.toml + theme.toml)"
+ok "yazi/ + yazi-dark/ (yazi.toml + theme.toml + init.lua)"
+
+# git.yazi plugin — shows git status next to files
+if [ ! -d "$HOME_DIR/.config/yazi/plugins/git.yazi" ]; then
+    info "Installing git.yazi plugin..."
+    ya pkg add yazi-rs/plugins:git
+fi
+mkdir -p "$HOME_DIR/.config/yazi-dark/plugins"
+if [ ! -d "$HOME_DIR/.config/yazi-dark/plugins/git.yazi" ]; then
+    cp -R "$HOME_DIR/.config/yazi/plugins/git.yazi" "$HOME_DIR/.config/yazi-dark/plugins/"
+fi
+ok "git.yazi plugin installed in both yazi and yazi-dark"
 
 # Dark zellij config (needs a full zellij config with flexoki-dark theme).
 # If user has an existing main config.kdl, we derive the dark variant from it.
