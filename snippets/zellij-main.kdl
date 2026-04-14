@@ -9,8 +9,8 @@ pane_frames false
 show_startup_tips false
 show_release_notes false
 
-// Toggle yazi pane with Option+B (macOS) / Alt+B.
+// Toggle yazi floating pane with Option+B (macOS) / Alt+B.
 // Add this binding INSIDE the `shared_except "locked" { ... }` block that
 // already exists in the default config:
 //
-//     bind "Alt b" { MoveFocus "left"; ToggleFocusFullscreen; }
+//     bind "Alt b" { ToggleFloatingPanes; }

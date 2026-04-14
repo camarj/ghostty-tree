@@ -1,10 +1,10 @@
 layout {
-    tab name="tree" {
-        pane split_direction="vertical" {
-            pane name="shell" size="65%"
-            pane name="yazi" size="35%" {
+    tab name="tree" hide_floating_panes=true {
+        pane name="shell"
+        floating_panes {
+            pane name="yazi" x="65%" y="0%" width="35%" height="100%" {
                 command "sh"
-                args "-c" "YAZI_CONFIG_HOME=$HOME/.config/yazi-dark yazi"
+                args "-c" "ID=\"$(date +%s)$$\"; mkdir -p /tmp; printf %s \"$ID\" > \"/tmp/yazi-zellij-${ZELLIJ_SESSION_NAME:-default}.id\"; YAZI_CONFIG_HOME=$HOME/.config/yazi-dark exec yazi --client-id \"$ID\""
             }
         }
     }
