@@ -243,6 +243,49 @@ Or any other CLI you'd normally run in a terminal.
 
 ---
 
+## Launch from Raycast
+
+The bundled Raycast script commands let you trigger either mode from Raycast (with an optional hotkey or alias).
+
+### Setup
+
+1. Copy the scripts to a directory Raycast can watch:
+
+   ```bash
+   mkdir -p ~/Documents/raycast-scripts
+   cp raycast/*.sh ~/Documents/raycast-scripts/
+   chmod +x ~/Documents/raycast-scripts/*.sh
+   ```
+
+2. Open Raycast → `⌘,` (Preferences) → **Extensions** → **Script Commands** → **+ Add Script Directory** → select `~/Documents/raycast-scripts`.
+
+3. Raycast now shows two commands:
+
+   - **Ghostty Tree** 🌳 — opens light mode
+   - **Ghostty Tree Dark** 🌙 — opens dark mode
+
+4. (Optional) While one is selected in Raycast's preferences, set a **Hotkey** (e.g. `⌥⌘T`) or an **Alias** (e.g. `tree`) so you can trigger it instantly.
+
+### How the scripts work
+
+Raycast script commands are plain shell scripts with a metadata header. The launcher is a one-liner that opens Ghostty with the right config file — no aliases or `.zshrc` dependency, so it works even though Raycast's shell isn't interactive.
+
+```bash
+#!/bin/bash
+# @raycast.schemaVersion 1
+# @raycast.title Ghostty Tree
+# @raycast.mode silent
+# @raycast.icon 🌳
+# @raycast.packageName Terminal
+# @raycast.description Open Ghostty with shell + Yazi tree split (light mode)
+
+open -na Ghostty --args --config-file="$HOME/.config/ghostty/config-tree"
+```
+
+See [`raycast/ghostty-tree.sh`](raycast/ghostty-tree.sh) and [`raycast/ghostty-tree-dark.sh`](raycast/ghostty-tree-dark.sh).
+
+---
+
 ## File structure
 
 ```
@@ -265,11 +308,14 @@ ghostty-tree/
 ├── yazi-dark/
 │   ├── yazi.toml                # Copy of above
 │   └── theme.toml               # Dark color scheme
-└── snippets/
-    ├── ghostty-main.conf        # Append to your main Ghostty config
-    ├── zellij-main.kdl          # Append/merge into ~/.config/zellij/config.kdl
-    ├── starship.toml            # Merge into ~/.config/starship.toml
-    └── zshrc.sh                 # Append to ~/.zshrc
+├── snippets/
+│   ├── ghostty-main.conf        # Append to your main Ghostty config
+│   ├── zellij-main.kdl          # Append/merge into ~/.config/zellij/config.kdl
+│   ├── starship.toml            # Merge into ~/.config/starship.toml
+│   └── zshrc.sh                 # Append to ~/.zshrc
+└── raycast/
+    ├── ghostty-tree.sh          # Raycast script command — light mode
+    └── ghostty-tree-dark.sh     # Raycast script command — dark mode
 ```
 
 ### Files created in your `~/.config` after install
